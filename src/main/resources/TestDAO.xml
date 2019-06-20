@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.test.dao.TestDAO">
+  <insert id="insertOnDuplicateKeyUpdate" useGeneratedKeys="true" keyProperty="list.id">
+    insert into test (key_id, time)
+    VALUES
+    <foreach collection="list" item="item" separator=",">
+      (#{item.keyId}, #{item.time})
+    </foreach>
+    on duplicate key update time = values(time)
+  </insert>
+</mapper>
